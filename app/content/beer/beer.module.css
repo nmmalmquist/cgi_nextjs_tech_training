@@ -1,0 +1,21 @@
+.customGrid{
+  margin: 100px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  column-gap: 50px;
+  row-gap: 50px;
+
+}
+.card{
+  border: 1px black solid;
+  height: 300px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.imageContainer{
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
