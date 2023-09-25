@@ -16,7 +16,7 @@ const ContactForm = () => {
         handleSubmit,
         watch,
         formState: { errors },
-        reset
+        reset,
     } = useForm<Inputs>();
 
     const [responseMessage, setResponseMessage] = useState("");
@@ -39,18 +39,27 @@ const ContactForm = () => {
                     {responseMessage}
                 </span>
             )}
+            <label>Email: </label>
             <input
-                className="border rounded m-2"
+                className="border rounded my-2 p-1"
                 placeholder="Email"
                 {...register("email", {
-                    required: true,
+                    required: {
+                        value: true,
+                        message: "Email is required"
+                    },
+                    pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Entered value does not match email format",
+                    },
                 })}
             />
             {errors.email && (
-                <span className="text-red-900">This field is required</span>
+                <span className="text-red-900">{errors.email.message}</span>
             )}
+            <label>Name: </label>
             <input
-                className="border rounded m-2"
+                className="border rounded my-2 p-1"
                 placeholder="Name"
                 {...register("name", {
                     required: true,
@@ -59,8 +68,9 @@ const ContactForm = () => {
             {errors.name && (
                 <span className="text-red-900">This field is required</span>
             )}
+            <label>Message: </label>
             <textarea
-                className="border rounded m-2"
+                className="border rounded my-2 p-1"
                 placeholder="Message"
                 {...register("message", {
                     required: true,
@@ -77,7 +87,7 @@ const ContactForm = () => {
                 type="button"
                 className="bg-gray-500 rounded p-4 text-white mt-3"
                 onClick={() => {
-                    reset()
+                    reset();
                     setResponseMessage("");
                 }}
             >
